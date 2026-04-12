@@ -1,0 +1,11 @@
+target/
+mvnw.cmd
+.git/
+.gitignore
+.dockerignore
+Dockerfile
+HELP.md
+.idea/
+.vscode/
+*.iml
+.DS_Store
