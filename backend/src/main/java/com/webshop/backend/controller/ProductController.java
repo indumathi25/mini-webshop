@@ -28,6 +28,12 @@ public class ProductController {
         return productService.getProducts(query, PageRequest.of(page, size));
     }
 
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable Long id) {
+        log.info("Request product by id: {}", id);
+        return productService.getProductById(id);
+    }
+
     @PostMapping("/purchase")
     public ResponseEntity<String> purchase(@RequestBody List<Product> items) {
         log.info("Processing purchase for {} items", items.size());

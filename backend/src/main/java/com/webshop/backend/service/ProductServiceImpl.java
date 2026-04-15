@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import com.webshop.backend.exception.ResourceNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -23,5 +24,12 @@ public class ProductServiceImpl implements ProductService {
         }
         log.info("Fetching all products");
         return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Product getProductById(Long id) {
+        log.info("Fetching product with id: {}", id);
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with ID " + id + " not found"));
     }
 }
