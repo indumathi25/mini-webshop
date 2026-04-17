@@ -4,7 +4,6 @@ import type { Product } from '../products/types';
 import type { BasketItem, BasketState } from './types';
 
 const loadBasket = (): BasketState => {
-  try {
     const saved = localStorage.getItem('webshop_basket');
     if (saved) {
       const parsed = JSON.parse(saved);
@@ -24,9 +23,7 @@ const loadBasket = (): BasketState => {
       }
       return parsed;
     }
-  } catch (e) {
-    console.error('Failed to load basket from localStorage', e);
-  }
+  
   return { items: [], totalPrice: 0 };
 };
 
@@ -43,7 +40,6 @@ const basketSlice = createSlice({
           existingItem.quantity += 1;
           state.totalPrice = Number((state.totalPrice + action.payload.price).toFixed(2));
         } else {
-          console.warn(`Cannot add more of product ${action.payload.id}, max stock reached: ${action.payload.stock}`);
           return; 
         }
       } else {
@@ -51,7 +47,6 @@ const basketSlice = createSlice({
           state.items.push({ ...action.payload, quantity: 1 });
           state.totalPrice = Number((state.totalPrice + action.payload.price).toFixed(2));
         } else {
-          console.warn(`Product ${action.payload.id} is out of stock`);
           return;
         }
       }
@@ -69,7 +64,6 @@ const basketSlice = createSlice({
           item.quantity = newQuantity;
           state.totalPrice = Number((state.totalPrice + (item.price * action.payload.delta)).toFixed(2));
         } else {
-          console.warn(`Cannot update quantity for product ${item.id}, max stock reached: ${item.stock}`);
           return;
         }
         localStorage.setItem('webshop_basket', JSON.stringify(state));

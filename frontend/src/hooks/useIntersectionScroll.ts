@@ -1,10 +1,5 @@
 import { useRef, useCallback } from 'react';
-
-interface UseIntersectionScrollProps {
-  isFetchingNextPage: boolean;
-  hasNextPage: boolean;
-  fetchNextPage: () => void;
-}
+import type { UseIntersectionScrollProps } from './types';
 
 export function useIntersectionScroll({
   isFetchingNextPage,
