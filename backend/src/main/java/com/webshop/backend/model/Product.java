@@ -33,4 +33,7 @@ public class Product {
 
     @NotBlank(message = "Category is required")
     private String category;
+
+    @NotNull(message = "Stock is required")
+    private Integer stock;
 }

@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
         log.error("Unhandled exception trapped by GlobalExceptionHandler at {}: {}", request.getRequestURI(),
                 ex.getMessage(), ex);
         return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error",
-                "An unexpected error occurred. Please contact support.", request.getRequestURI(), null);
+                "Unexpected error: " + ex.getMessage(), request.getRequestURI(), null);
     }
 
     private ResponseEntity<ApiErrorResponse> buildErrorResponse(HttpStatus status, String error, String message,
