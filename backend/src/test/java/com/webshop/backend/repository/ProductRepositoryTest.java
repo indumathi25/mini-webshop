@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
@@ -21,15 +22,17 @@ class ProductRepositoryTest {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private TestEntityManager entityManager;
+
     private Product vinylProduct;
-    private Product guitarProduct;
 
     @BeforeEach
     void setUp() {
         productRepository.deleteAll();
         vinylProduct = productRepository
                 .save(new Product(null, "Vintage Vinyl", "Great record", 19.99, "http://img1.url", "Music", 10));
-        guitarProduct = productRepository
+        productRepository
                 .save(new Product(null, "Acoustic Guitar", "Handcrafted", 299.99, "http://img2.url", "Instruments", 5));
     }
 
@@ -43,6 +46,10 @@ class ProductRepositoryTest {
             int rowsUpdated = productRepository.decrementStock(vinylProduct.getId(), 3);
 
             assertThat(rowsUpdated).isEqualTo(1);
+            
+            entityManager.flush();
+            entityManager.clear();
+
             Product updated = productRepository.findById(vinylProduct.getId()).orElseThrow();
             assertThat(updated.getStock()).isEqualTo(7); // 10 - 3
         }
@@ -53,6 +60,10 @@ class ProductRepositoryTest {
             int rowsUpdated = productRepository.decrementStock(vinylProduct.getId(), 50);
 
             assertThat(rowsUpdated).isEqualTo(0);
+            
+            entityManager.flush();
+            entityManager.clear();
+
             Product unchanged = productRepository.findById(vinylProduct.getId()).orElseThrow();
             assertThat(unchanged.getStock()).isEqualTo(10); // unchanged
         }
@@ -71,6 +82,10 @@ class ProductRepositoryTest {
             int rowsUpdated = productRepository.decrementStock(vinylProduct.getId(), 10);
 
             assertThat(rowsUpdated).isEqualTo(1);
+            
+            entityManager.flush();
+            entityManager.clear();
+
             Product updated = productRepository.findById(vinylProduct.getId()).orElseThrow();
             assertThat(updated.getStock()).isEqualTo(0);
         }

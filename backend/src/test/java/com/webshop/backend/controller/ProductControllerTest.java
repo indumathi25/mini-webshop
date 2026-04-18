@@ -1,6 +1,8 @@
 package com.webshop.backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.webshop.backend.config.RateLimitInterceptor;
+import com.webshop.backend.config.SecurityConfig;
 import com.webshop.backend.dto.PurchaseItem;
 import com.webshop.backend.exception.ResourceNotFoundException;
 import com.webshop.backend.model.Product;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +32,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(ProductController.class)
+@Import(SecurityConfig.class)
 @ActiveProfiles("test")
 @DisplayName("ProductController Integration Tests")
 class ProductControllerTest {
@@ -44,6 +48,9 @@ class ProductControllerTest {
 
     @MockitoBean
     private IdempotencyService idempotencyService;
+
+    @MockitoBean
+    private RateLimitInterceptor rateLimitInterceptor;
 
     private Product sampleProduct;
 
