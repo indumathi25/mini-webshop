@@ -9,12 +9,12 @@ export const OrderSummary = memo(function OrderSummary({
     <div className="bg-white border-t border-slate-200 py-4 px-5">
       <div className="mb-3">
         <div className="flex justify-between mb-1.5">
-          <span className="text-[13px] text-slate-500">Subtotal ({totalItemsCount} items)</span>
+          <span className="text-[13px] text-slate-600 font-medium">Subtotal ({totalItemsCount} items)</span>
           <span className="text-[13px] font-semibold">{formatPrice(totalPrice)}</span>
         </div>
         <div className="flex justify-between mb-1.5">
-          <span className="text-[13px] text-slate-500">Shipping</span>
-          <span className="text-[13px] font-semibold text-green-600">Free</span>
+          <span className="text-[13px] text-slate-600 font-medium">Shipping</span>
+          <span className="text-[13px] font-semibold text-green-700">Free</span>
         </div>
         <div className="h-px bg-slate-200 my-2.5" />
         <div className="flex justify-between items-center">
@@ -40,7 +40,7 @@ export const OrderSummary = memo(function OrderSummary({
       <button
         id="clear-basket-btn"
         onClick={onClear}
-        className="w-full mt-2 bg-transparent border-none text-slate-400 hover:text-red-500 text-xs cursor-pointer p-1.5 transition-colors"
+        className="w-full mt-2 bg-transparent border-none text-slate-500 hover:text-red-600 text-[11px] font-bold tracking-wide cursor-pointer p-1.5 transition-colors uppercase"
       >
         Empty basket
       </button>

@@ -4,7 +4,7 @@ import type { PriceBlockProps } from '../types';
 export const PriceBlock = memo(function PriceBlock({ euros, cents, wasPrice, large = false }: PriceBlockProps) {
   return (
     <div className="mb-1">
-      <div className="text-xs text-slate-400 line-through min-h-[1.2rem]">
+      <div className="text-xs text-slate-700 line-through min-h-[1.2rem]">
         {wasPrice ? `€${wasPrice.toFixed(2)}` : ''}
       </div>
       <div className="text-slate-900">

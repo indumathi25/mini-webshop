@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { fetchProducts } from './features/products/api'
 import './index.css'
 import App from './App.tsx'
 
@@ -12,6 +13,12 @@ const queryClient = new QueryClient({
     },
   },
 })
+
+queryClient.prefetchInfiniteQuery({
+  queryKey: ['products', ''],
+  queryFn: () => fetchProducts({ query: '', page: 0 }),
+  initialPageParam: 0,
+});
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

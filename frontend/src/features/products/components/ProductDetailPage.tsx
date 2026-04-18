@@ -25,7 +25,7 @@ export default function ProductDetailPage() {
   const basketQuantity = basketItem ? basketItem.quantity : 0;
   const isMaxStockReached = selectedProduct ? basketQuantity >= selectedProduct.stock : false;
 
-  if (!productId) return <div className="p-12 text-center text-slate-500">Invalid product ID.</div>;
+  if (!productId) return <div className="p-12 text-center text-slate-600">Invalid product ID.</div>;
 
   const handleAdd = () => {
     if (selectedProduct && selectedProduct.stock > 0 && !isMaxStockReached) {
@@ -53,7 +53,7 @@ export default function ProductDetailPage() {
           {isLoading ? (
             <div className="text-center py-20 flex flex-col items-center">
               <div className="animate-spin inline-block w-8 h-8 border-4 border-slate-200 border-t-blue-600 rounded-full mb-4"></div>
-              <div className="text-slate-500 text-sm font-medium">Loading product details...</div>
+              <div className="text-slate-600 text-sm font-medium">Loading product details...</div>
             </div>
           ) : isError ? (
             <div className="text-center py-20 text-red-600 font-medium bg-red-50 rounded-lg">
@@ -65,6 +65,8 @@ export default function ProductDetailPage() {
                 <img
                   src={selectedProduct.imageUrl}
                   alt={selectedProduct.name}
+                  width={512}
+                  height={400}
                   className="w-full h-auto max-h-[400px] object-contain mix-blend-multiply"
                 />
               </div>
@@ -87,7 +89,7 @@ export default function ProductDetailPage() {
                 </div>
                 
                 <div className="flex-1 mt-8 mb-10">
-                  <h3 className="m-0 mb-3 text-[15px] font-bold text-slate-900 border-b border-slate-100 pb-3">Product Description</h3>
+                  <h2 className="m-0 mb-3 text-[15px] font-bold text-slate-900 border-b border-slate-100 pb-3">Product Description</h2>
                   <p className="text-[15px] text-slate-600 leading-relaxed max-w-prose">
                     {selectedProduct.description}
                   </p>

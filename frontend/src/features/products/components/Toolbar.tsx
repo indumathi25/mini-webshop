@@ -16,7 +16,7 @@ export const Toolbar = memo(function Toolbar({
 
   return (
     <div className="bg-white border border-slate-200 rounded-lg py-3 px-4 flex items-center justify-between mb-4 flex-wrap gap-3 relative">
-      <span className="text-[13px] text-slate-500 font-medium">
+      <span className="text-[13px] text-slate-600 font-semibold">
         <strong className="text-slate-900">{resultCount}</strong> results
         {searchQuery && <span> for <em className="italic">"{searchQuery}"</em></span>}
       </span>
@@ -29,8 +29,9 @@ export const Toolbar = memo(function Toolbar({
       )}
 
       <div className="flex items-center gap-2">
-        <label className="text-[13px] text-slate-500 font-medium whitespace-nowrap">Sort by:</label>
+        <label htmlFor="sort-select" className="text-[13px] text-slate-600 font-semibold whitespace-nowrap">Sort by:</label>
         <select
+          id="sort-select"
           value={sortBy}
           onChange={handleChange}
           className="py-1.5 px-2.5 border border-slate-200 rounded text-[13px] text-slate-900 bg-white cursor-pointer focus:outline-none focus:border-blue-500"

@@ -12,6 +12,7 @@ export const BasketIcon = ({ onClick }: { onClick: () => void }) => {
     <button
       onClick={onClick}
       className="relative flex flex-col items-center gap-0.5 p-2 rounded text-blue-800 hover:bg-blue-50 transition-colors border-none bg-transparent cursor-pointer"
+      aria-label={`View basket with ${count} items`}
     >
       <div className="relative">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

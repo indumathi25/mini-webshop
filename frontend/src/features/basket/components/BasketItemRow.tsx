@@ -36,7 +36,14 @@ export const BasketItemRow = memo(function BasketItemRow({ item, onProductClick 
       onClick={() => onProductClick(item.id)}
     >
       <div className="w-[72px] h-[72px] shrink-0 bg-white rounded-md flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-contain p-1.5" />
+        <img 
+          src={item.imageUrl} 
+          alt={item.name} 
+          width={72}
+          height={72}
+          loading="lazy"
+          className="w-full h-full object-contain p-1.5" 
+        />
       </div>
 
       <div className="flex-1 min-w-0">
@@ -49,6 +56,7 @@ export const BasketItemRow = memo(function BasketItemRow({ item, onProductClick 
             onClick={handleRemove}
             className="bg-transparent border-none text-slate-300 hover:text-red-500 cursor-pointer p-0.5 rounded flex items-center transition-colors shrink-0"
             title="Remove item"
+            aria-label={`Remove ${item.name} from basket`}
           >
             <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
               <polyline points="3 6 5 6 21 6"/>
@@ -65,6 +73,7 @@ export const BasketItemRow = memo(function BasketItemRow({ item, onProductClick 
             <button
               onClick={handleDecrement}
               className="w-6 h-6 flex items-center justify-center bg-white border border-slate-200 rounded text-slate-600 hover:bg-slate-50 cursor-pointer"
+              aria-label={`Decrease quantity of ${item.name}`}
             >
               -
             </button>
@@ -75,6 +84,7 @@ export const BasketItemRow = memo(function BasketItemRow({ item, onProductClick 
               onClick={handleIncrement}
               disabled={item.quantity >= item.stock}
               className="w-6 h-6 flex items-center justify-center bg-white border border-slate-200 rounded text-slate-600 hover:bg-slate-50 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label={`Increase quantity of ${item.name}`}
             >
               +
             </button>
