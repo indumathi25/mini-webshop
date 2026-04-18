@@ -2,7 +2,6 @@ import { memo } from 'react';
 import ProductCard from './ProductCard';
 import type { ProductGridItemProps } from '../types';
 
-// Extracted so the ref-attachment logic doesn't force an inline ternary in the map
 export const ProductGridItem = memo(function ProductGridItem({
   product,
   isLast,
