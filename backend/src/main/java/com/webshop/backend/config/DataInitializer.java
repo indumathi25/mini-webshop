@@ -1,8 +1,9 @@
 package com.webshop.backend.config;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 import com.webshop.backend.model.Product;
 import com.webshop.backend.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,9 @@ public class DataInitializer implements CommandLineRunner {
         if (productRepository.count() == 0) {
             log.info("Database is empty. Loading products from products.json...");
             Resource resource = resourceLoader.getResource("classpath:products.json");
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            ObjectMapper objectMapper = JsonMapper.builder()
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .build();
 
             try {
                 List<Product> products = objectMapper.readValue(

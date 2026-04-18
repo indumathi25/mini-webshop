@@ -6,8 +6,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.data.jpa.test.autoconfigure.AutoConfigureDataJpa;
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.jpa.test.autoconfigure.AutoConfigureTestEntityManager;
+import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
@@ -15,6 +17,8 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
+@AutoConfigureDataJpa
+@AutoConfigureTestEntityManager
 @ActiveProfiles("test")
 @DisplayName("ProductRepository Slice Tests")
 class ProductRepositoryTest {
@@ -46,7 +50,7 @@ class ProductRepositoryTest {
             int rowsUpdated = productRepository.decrementStock(vinylProduct.getId(), 3);
 
             assertThat(rowsUpdated).isEqualTo(1);
-            
+
             entityManager.flush();
             entityManager.clear();
 
@@ -60,7 +64,7 @@ class ProductRepositoryTest {
             int rowsUpdated = productRepository.decrementStock(vinylProduct.getId(), 50);
 
             assertThat(rowsUpdated).isEqualTo(0);
-            
+
             entityManager.flush();
             entityManager.clear();
 
@@ -82,7 +86,7 @@ class ProductRepositoryTest {
             int rowsUpdated = productRepository.decrementStock(vinylProduct.getId(), 10);
 
             assertThat(rowsUpdated).isEqualTo(1);
-            
+
             entityManager.flush();
             entityManager.clear();
 
